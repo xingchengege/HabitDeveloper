@@ -3,6 +3,7 @@ package com.example.habitdeveloper.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.VideoView;
@@ -28,12 +29,12 @@ public class CountDownActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
         String url = "android.resource://" + getPackageName()+"/"+R.raw.park;
         videoView.setVideoURI(Uri.parse(url));
+        videoView.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
         videoView.start();
         chronometer = findViewById(R.id.textClock);
-        chronometer.setOnTimeCompleteListener(()->
-            new AlertDialog.Builder(this)
-                    .setTitle("HelloWorld")
-                    .show()
+        chronometer.setOnTimeCompleteListener(()-> new AlertDialog.Builder(this)
+                .setTitle("HelloWorld")
+                .show()
         );
         chronometer.start(30);
 
