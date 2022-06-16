@@ -1,0 +1,4 @@
+# HabitDeveloper
+CountDownAcitivity中button：btn可以删除，该键仅用于测试；
+CountDownAcitivity默认横屏
+倒计时触发器可自行设置为跳转页面（activity）

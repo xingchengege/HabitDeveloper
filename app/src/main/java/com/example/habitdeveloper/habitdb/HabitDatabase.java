@@ -1,16 +1,20 @@
 package com.example.habitdeveloper.habitdb;
 
-public abstract class HabitDatabase {
-    private volatile static HabitDatabase INSTANCE; //单例模式
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
-    public static HabitDatabase getInstance() {
-        if(INSTANCE == null){
-            synchronized (HabitDatabase.class){
-                if(INSTANCE == null){
-                    //创建实例
-                }
-            }
-        }
-        return INSTANCE;
-    }
+import com.example.habitdeveloper.habitdb.DAO.ActionDao;
+import com.example.habitdeveloper.habitdb.DAO.RecordDao;
+import com.example.habitdeveloper.habitdb.entity.Action;
+import com.example.habitdeveloper.habitdb.entity.Record;
+
+
+
+@Database(entities = {Action.class, Record.class}, version = 1,exportSchema = false)
+public abstract class HabitDatabase extends RoomDatabase {
+
+    public abstract ActionDao getActionDao();
+    public abstract RecordDao getRecordDao();
+
 }
+
