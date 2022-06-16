@@ -16,6 +16,8 @@
         <activity
             android:name=".activity.CountDownActivity"
             android:exported="true">
+            android:screenOrientation="landscape"
+            android:screenOrientation="sensorLandscape"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
