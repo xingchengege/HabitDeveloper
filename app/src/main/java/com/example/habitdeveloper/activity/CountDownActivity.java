@@ -10,6 +10,9 @@ import android.widget.VideoView;
 import com.example.habitdeveloper.R;
 import com.example.habitdeveloper.customview.AntiChronometer;
 import com.example.habitdeveloper.customview.MyCalendarView;
+import com.example.habitdeveloper.habitdb.Executors.AppExecutors;
+import com.example.habitdeveloper.habitdb.HabitDatabaseInstance;
+import com.example.habitdeveloper.habitdb.entity.Action;
 
 
 public class CountDownActivity extends AppCompatActivity {
@@ -21,6 +24,16 @@ public class CountDownActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Action a1 = new Action();
+        a1.setId("残念");
+        a1.setName("学习");
+        a1.setTimes(0);
+        new AppExecutors().getDiskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                HabitDatabaseInstance.habitDatabaseinstance.getActionDao().insert(a1);
+            }
+        });
         if(getSupportActionBar() != null)
             getSupportActionBar().hide();
         setContentView(R.layout.activity_countdown);
