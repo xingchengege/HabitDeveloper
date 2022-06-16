@@ -6,13 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+<<<<<<< HEAD
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="qwe"
+=======
+    <LinearLayout
+        android:id="@+id/container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>>>>>>> c98acbaa0b35e1b2230f5fb5b9a78e8138d77ae5
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical" />
 </androidx.constraintlayout.widget.ConstraintLayout>

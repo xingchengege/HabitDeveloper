@@ -36,29 +36,30 @@ public class AntiChronometer extends Chronometer implements Chronometer.OnChrono
 
     public AntiChronometer(Context context) {
         super(context);
-        super.setOnChronometerTickListener(this);
+        setOnChronometerTickListener(this);
     }
 
     public AntiChronometer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        super.setOnChronometerTickListener(this);
+        setOnChronometerTickListener(this);
     }
 
     public AntiChronometer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        super.setOnChronometerTickListener(this);
+        setOnChronometerTickListener(this);
     }
 
     public AntiChronometer(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        super.setOnChronometerTickListener(this);
+        setOnChronometerTickListener(this);
     }
 
     @Override
     public void onChronometerTick(Chronometer chronometer) {
         leftTime -= 1;
         if(leftTime < 0){
-            super.stop();
+            leftTime = 998244353;
+            this.stop();
             if(onTimeCompleteListener != null)
                 onTimeCompleteListener.onTimeComplete();
         }

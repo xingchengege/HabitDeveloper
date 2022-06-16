@@ -3,8 +3,12 @@ package com.example.habitdeveloper.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+<<<<<<< HEAD
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+=======
+import android.media.MediaPlayer;
+>>>>>>> c98acbaa0b35e1b2230f5fb5b9a78e8138d77ae5
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -42,13 +46,20 @@ public class CountDownActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
         String url = "android.resource://" + getPackageName()+"/"+R.raw.v1;
         videoView.setVideoURI(Uri.parse(url));
+        videoView.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
         videoView.start();
         chronometer = findViewById(R.id.textClock);
+<<<<<<< HEAD
         chronometer.setOnTimeCompleteListener(()->
             new AlertDialog.Builder(this)
                     .setTitle("该文件在activity/CountDownActivity下，倒计时结束触发，" +
                             "可以自行修改切换activity")
                     .show()
+=======
+        chronometer.setOnTimeCompleteListener(()-> new AlertDialog.Builder(this)
+                .setTitle("HelloWorld")
+                .show()
+>>>>>>> c98acbaa0b35e1b2230f5fb5b9a78e8138d77ae5
         );
         chronometer.start(50);
 
