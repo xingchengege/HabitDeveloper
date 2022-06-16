@@ -14,9 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HabitDeveloper"
         tools:targetApi="31">
+
         <activity
             android:name=".activity.CountDownActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

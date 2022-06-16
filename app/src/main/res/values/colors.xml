@@ -5,6 +5,14 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+<!--以下是项目应使用的色系-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#FFBAC2D4</color>
+    <color name="brown">#FFbeb5a4</color>
+    <color name="yellow">#FFf8f1e0</color>
+    <color name="green">#DCCCCB</color>
+    <color name="pink">#E2CECE</color>
+    <color name="gray_yellow">#F1E1D0</color>
+    <color name="orange">#E38C7A</color>
 </resources>
