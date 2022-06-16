@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/bg_countdown_clock.xml" value="0.1" />
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/calendar_text.xml" value="0.1" />
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/shap.xml" value="0.1" />
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/shape.xml" value="0.1" />
         <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/layout/activity_calendar.xml" value="0.264" />
+        <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/layout/activity_countdown.xml" value="0.24947916666666667" />
         <entry key="..\:/githubdesk_ku/HabitDeveloper/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
       </map>
     </option>

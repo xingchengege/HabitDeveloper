@@ -11,8 +11,8 @@
     <color name="blue">#FFBAC2D4</color>
     <color name="brown">#FFbeb5a4</color>
     <color name="yellow">#FFf8f1e0</color>
-    <color name="green">#DCCCCB</color>
-    <color name="pink">#E2CECE</color>
-    <color name="gray_yellow">#F1E1D0</color>
-    <color name="orange">#E38C7A</color>
+    <color name="green">#FFDCCCCB</color>
+    <color name="pink">#FFE2CECE</color>
+    <color name="gray_yellow">#FFF1E1D0</color>
+    <color name="orange">#FFE38C7A</color>
 </resources>

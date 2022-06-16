@@ -7,11 +7,14 @@ import android.text.style.LineBackgroundSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.example.habitdeveloper.R;
+import com.example.habitdeveloper.viewmodal.calendarDecorator.EventDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
 
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
@@ -54,17 +57,24 @@ public class MyCalendarView extends MaterialCalendarView {
 
         this.state().edit()
         .setFirstDayOfWeek(DayOfWeek.SUNDAY)
-        .setMinimumDate(CalendarDay.from(cd.get(Calendar.YEAR)-1, cd.get(Calendar.MONTH)+1, 1))
-        .setMaximumDate(CalendarDay.from(cd.get(Calendar.YEAR), cd.get(Calendar.MONTH)+1, 31))
+        .setMinimumDate(CalendarDay.from(cd.get(Calendar.YEAR)-10, cd.get(Calendar.MONTH)+1, 1))
+        .setMaximumDate(CalendarDay.from(cd.get(Calendar.YEAR)+10, cd.get(Calendar.MONTH)+1, cd.get(Calendar.DATE)))
         .setCalendarDisplayMode(CalendarMode.MONTHS)
         .commit();
 
         this.setWeekDayLabels(new String[]{"一","二","三","四","五","六","日"});
+
         this.setTitleFormatter(day ->{
             StringBuffer buffer = new StringBuffer();
             buffer.append(day.getYear()).append("年").append(day.getMonth()).append("月");
             return buffer;
         });
+
+        this.setSelectionColor(0xFFBAC2D4);
+
+        List<Date> dates=new ArrayList<>();
+        dates.add(new Date(System.currentTimeMillis() - 1000 * 60));
+        this.addDecorator(new EventDecorator(dates));
     }
 
 
@@ -97,5 +107,6 @@ public class MyCalendarView extends MaterialCalendarView {
             });
         }
     }
+
 
 }
