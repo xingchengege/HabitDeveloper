@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +16,12 @@ import android.widget.VideoView;
 import com.example.habitdeveloper.R;
 import com.example.habitdeveloper.customview.AntiChronometer;
 import com.example.habitdeveloper.customview.MyCalendarView;
-import com.example.habitdeveloper.habitdb.Executors.AppExecutors;
-import com.example.habitdeveloper.habitdb.HabitDatabaseInstance;
-import com.example.habitdeveloper.habitdb.entity.Action;
+import com.example.habitdeveloper.model.BallModel;
+import com.example.habitdeveloper.model.CountDownBg;
+import com.example.habitdeveloper.model.TipsModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CountDownActivity extends AppCompatActivity {

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HabitDeveloper</string>
     <string name="calendar_default_text">"选择日期查看。"</string>
+    <string name="isUp">hhhhh</string>
+    <string name="offset">offset</string>
+
 </resources>

@@ -1,17 +1,11 @@
 package com.example.habitdeveloper.habitdb.entity;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
 
-@Entity(primaryKeys = {"dates"})
 public class Record {
 
-    @ColumnInfo(name="dates")
-    @NonNull
+
     private String dates;
 
-    @ColumnInfo(name="record")
     private String record;
 
     public String getDates() {
