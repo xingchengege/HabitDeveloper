@@ -4,5 +4,11 @@
     <string name="isUp">hhhhh</string>
     <string name="offset">offset</string>
     <string name="calendar_undo">没有活动哦，继续加油吧。</string>
+    <string name="action_add">添加</string>
+    <string name="create_action">创建新的活动</string>
+    <string name="action_name_hint">请输入活动名</string>
+    <string name="action_time_hint">请输入定时时间（单位：分钟）</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
 
 </resources>

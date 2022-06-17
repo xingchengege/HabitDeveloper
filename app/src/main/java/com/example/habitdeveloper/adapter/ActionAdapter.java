@@ -8,20 +8,34 @@ import android.view.ViewGroup;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.habitdeveloper.R;
 import com.example.habitdeveloper.activity.CountDownActivity;
 import com.example.habitdeveloper.habitdb.entity.Action;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolder> {
 
     private final List<Action> actions;
     private final Context context;
+    private static final List<Integer> colorResList = new ArrayList<>();
+    static {
+        colorResList.add(R.color.blue);
+        colorResList.add(R.color.orange);
+        colorResList.add(R.color.brown);
+        colorResList.add(R.color.yellow);
+        colorResList.add(R.color.pink);
+        colorResList.add(R.color.green);
+        Collections.shuffle(colorResList);
+    }
 
     public ActionAdapter(Context context, List<Action> data){
         this.actions = data;
@@ -37,8 +51,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolde
 
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
-//        holder.setData(actions.get(position));
-        holder.setData();
+        holder.setData(actions.get(position));
+        holder.setColor(colorResList.get(position%colorResList.size()));
     }
 
     @Override
@@ -63,16 +77,32 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolde
         }
 
         public void setData(Action action){
-            //textView.setText(action.getName());
-            //textClock.setText(String.format("%d min", action.getTime()));
+            textView.setText(action.getName());
+            textClock.setText(String.format("%d min", action.getTimes()));
+            bindClickListener(action);
         }
 
+        public void bindClickListener(Action action){
+            cardView.setOnClickListener(e -> {
+                Intent intent = new Intent(context, CountDownActivity.class);
+                intent.putExtra("name", action.getName());
+                intent.putExtra("time", action.getTimes());
+                context.startActivity(intent);
+            });
+        }
+
+        public void setColor(int color){
+            cardView.setCardBackgroundColor(ContextCompat.getColor(context, color));
+        }
+
+        @Deprecated
         public void setData(){
             textView.setText("健身运动");
             textClock.setText("jjim");
             bindClickListener();
         }
 
+        @Deprecated
         public void bindClickListener(){
             cardView.setOnClickListener(e -> {
                 Intent intent = new Intent(context, CountDownActivity.class);

@@ -15,4 +15,7 @@
     <color name="pink">#FFE2CECE</color>
     <color name="gray_yellow">#FFF1E1D0</color>
     <color name="orange">#FFE38C7A</color>
+
+    <color name="text_blue"> #FF0000FF</color>
+    <color name="text_red"> #FFFF0000</color>
 </resources>

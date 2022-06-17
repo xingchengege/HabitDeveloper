@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog_confirm"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="@string/create_action"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
+
+        <EditText
+            android:id="@+id/action_name_editor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_dialog_input"
+            android:gravity="center_horizontal"
+            android:hint="@string/action_name_hint"
+
+            android:inputType="text"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="#757575"
+            android:textSize="17sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/action_time_editor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_dialog_input"
+            android:gravity="center_horizontal"
+
+            android:hint="@string/action_time_hint"
+            android:inputType="number"
+            android:lineSpacingExtra="5dp"
+
+            android:textColor="@color/black"
+            android:textColorHint="#757575"
+            android:textSize="17sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:autofillHints="" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DFDFDF" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dialog_confirm_sure"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/sure"
+                android:textColor="@color/text_blue"
+                android:textSize="17sp"
+                android:focusable="true" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#DFDFDF" />
+
+            <TextView
+                android:id="@+id/dialog_confirm_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="#D50000"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
