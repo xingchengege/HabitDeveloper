@@ -14,9 +14,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.habitdeveloper.R;
-import com.example.habitdeveloper.customview.AntiChronometer;
+import com.example.habitdeveloper.customview.*;
 import com.example.habitdeveloper.customview.MyCalendarView;
-import com.example.habitdeveloper.model.BallModel;
+import com.example.habitdeveloper.model.*;
 import com.example.habitdeveloper.model.CountDownBg;
 import com.example.habitdeveloper.model.TipsModel;
 
@@ -49,10 +49,12 @@ public class CountDownActivity extends AppCompatActivity {
         videoView.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
         videoView.start();
         chronometer = findViewById(R.id.textClock);
+        Intent intent = getIntent();
+        String name=intent.getStringExtra("name");
+        String time=intent.getStringExtra("time");
         chronometer.setOnTimeCompleteListener(()->
             new AlertDialog.Builder(this)
-                    .setTitle("该文件在activity/CountDownActivity下，倒计时结束触发，" +
-                            "可以自行修改切换activity")
+                    .setTitle("在"+time+"中，你做了"+name+"呢!")
                     .show());
         chronometer.setOnTimeCompleteListener(()-> new AlertDialog.Builder(this)
                 .setTitle("HelloWorld")
