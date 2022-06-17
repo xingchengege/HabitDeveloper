@@ -6,8 +6,11 @@ import android.database.Cursor;
 
 import com.example.habitdeveloper.habitdb.entity.Action;
 
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -68,19 +71,6 @@ public class DBUtils {
 
     }
 
-    //插入活动
-    public boolean AddAction(Action action) {
-        //活动id已存在则插入失败
-        String sql1 = "select count(*) from action_tb where id = '" + action.getId() + "'";    //sql语句查询是否存在该名字
-        Cursor cursor = db.rawQuery(sql1, null);
-        cursor.moveToFirst();
-        int count = cursor.getInt(0);
-        if (count == 1)      //若已经存在这个名字的习惯则直接返回false
-            return false;
-        String sql="insert into action_tb values （'"+action.getId()+"','"+action.getName()+"',"+action.getTimes()+"）";
-        db.execSQL(sql);
-        return true;
-    }
 
     //更新活动的time
     public void updateAction_times(Action action) {
@@ -108,22 +98,47 @@ public class DBUtils {
         return true;
     }
 
-    //通过name查找action_times
-    public List<Action> findAction_byid(Action action) {
-        //name是否存在
-        String sql = "select count(*) from action_tb where name = '" + action.getName() + "'";    //sql语句查询是否存在该名字
+
+    //插入活动（uuid专供版）:已通过测试
+    public boolean AddAction(Action action) {
+        UUID tuuid=UUID.randomUUID();
+        String uuid=tuuid.toString();
+        action.setId(uuid);
+        String sql1 = "select count(*) from "+Action_tablename+" where id = '" + action.getId() + "'";    //sql语句查询是否存在该名字
+        Cursor cursor = db.rawQuery(sql1, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        if (count == 1)      //若已经存在这个id的习惯则直接返回false
+            return false;
+
+        String sql="insert into "+Action_tablename+" values ('"+action.getId()+"','"+action.getName()+"',"+action.getTimes()+")";
+        db.execSQL(sql);
+        return true;
+    }
+
+
+    //通过name查找action_times:已通过测试
+    public List<Action> getAllAction() {
+        List<Action> actions=new ArrayList<Action>();
+        //action表是否为空
+        String sql = "select count(*) from "+Action_tablename+" ";
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         int count = cursor.getInt(0);
-        if (count == 1)      //若不存在这个名字的习惯则直接返回false
+        if (count < 1)
             return null;
-        String sql1="select times from action_tb where name = '" + action.getName() + "'";
+        String sql1="select * from "+Action_tablename+" ";
         Cursor c=db.rawQuery(sql1,null);
         c.moveToFirst();
-        Action[] actions=new Action[count];
-        return null;
+        while(!c.isAfterLast()){
+            Action action=new Action(c.getString(0),c.getString(1),c.getInt(2));
+            actions.add(action);
+            c.moveToNext();
+        }
+        return actions;
     }
 
+    //查找date对应的record是否存在：已通过测试
     public boolean findifRecordexist_byDate(String date){
         String sql1 = "select count(*) from "+Record_tablename+" where date = '" +date + "'";
         String sql2 = "select record from action_tb where date = '" +date + "'";
@@ -135,6 +150,8 @@ public class DBUtils {
         }
         return true;
     }
+
+    //查找并返回date对应的record：已通过测试
     public String findRecord_byDate(String date){
         boolean f=findifRecordexist_byDate(date);
         String record="null";

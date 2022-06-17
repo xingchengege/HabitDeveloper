@@ -11,7 +11,12 @@ public class Action {
 
     private int times;
 
-
+    public Action(String id,String name,int times){
+        this.id=id;
+        this.name=name;
+        this.times=times;
+    }
+    public Action(){};
     public String getId() {return this.id;}
     public String getName() {
         return name;
