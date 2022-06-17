@@ -3,8 +3,10 @@ package com.example.habitdeveloper.habitdb;
 import android.content.Context;
 import android.database.Cursor;
         import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.habitdeveloper.habitdb.entity.Action;
+import com.example.habitdeveloper.habitdb.entity.Record;
 
 
 import java.util.ArrayList;
@@ -72,17 +74,8 @@ public class DBUtils {
     }
 
 
-    //更新活动的time
-    public void updateAction_times(Action action) {
-        String sql="update action_tb set times="+action.getTimes()+" where id='"+action.getId()+"'";
-        db.execSQL(sql);
-    }
 
-    //更新活动的name
-    public void updateAction_name(Action action) {
-        String sql="update action_tb set name='"+action.getName()+"' where id='"+action.getId()+"'";
-        db.execSQL(sql);
-    }
+
 
     //删除活动
     public boolean deleteAction(Action action) {
@@ -97,6 +90,8 @@ public class DBUtils {
         db.execSQL(sql);
         return true;
     }
+
+
 
 
     //插入活动（uuid专供版）:已通过测试
@@ -139,6 +134,7 @@ public class DBUtils {
     }
 
     //查找date对应的record是否存在：已通过测试
+    //存在为：true;不存在为：false
     public boolean findifRecordexist_byDate(String date){
         String sql1 = "select count(*) from "+Record_tablename+" where date = '" +date + "'";
         String sql2 = "select record from action_tb where date = '" +date + "'";
@@ -165,5 +161,22 @@ public class DBUtils {
             }
         }
         return record;
+    }
+    //增加记录（PS：增加前记得要用findifRecordexist_byDate函数看一下是否存在，不存在再使用新增，否则用修改就可以了）:已经通过测试
+    public void AddRecord(Record record) {
+        String sql="insert into "+Record_tablename+" values ('"+record.getDates()+"','"+record.getRecord()+"')";
+        db.execSQL(sql);
+    }
+
+    //更新记录: 已经通过测试
+    public boolean updateRecord(Record record) {
+        boolean if_exist=findifRecordexist_byDate(record.getDates());
+        if(!if_exist){
+            Log.i("tag", "date当天无record");
+            return false;
+        }
+        String sql="update "+Record_tablename+" set  record = '"+record.getRecord()+"' where date  = '"+record.getDates()+"'";
+        db.execSQL(sql);
+        return true;
     }
 }

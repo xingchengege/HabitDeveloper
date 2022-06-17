@@ -4,12 +4,12 @@ package com.example.habitdeveloper.habitdb.entity;
 public class Record {
 
 
-    private String dates;
+    private String date;
 
     private String record;
 
     public String getDates() {
-        return dates;
+        return date;
     }
 
     public String getRecord() {
@@ -17,7 +17,7 @@ public class Record {
     }
 
     public void setDates(String dates) {
-        this.dates = dates;
+        this.date = dates;
     }
 
     public void setRecord(String record) {
