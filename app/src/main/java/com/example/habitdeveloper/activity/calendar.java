@@ -54,7 +54,7 @@ public class calendar extends AppCompatActivity {
                  if(text!= "null"){
                     textView.setText(text);
                 }else{
-                    textView.setText(dateString);
+                    textView.setText(dateString+getString(R.string.calendar_undo));
                 }
             }
         });
