@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 
+import androidx.fragment.app.*;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -16,13 +18,15 @@ import android.widget.VideoView;
 import com.example.habitdeveloper.R;
 import com.example.habitdeveloper.customview.*;
 import com.example.habitdeveloper.customview.MyCalendarView;
+import com.example.habitdeveloper.habitdb.DBUtils;
+import com.example.habitdeveloper.habitdb.MyDatabaseHelper;
 import com.example.habitdeveloper.model.*;
 import com.example.habitdeveloper.model.CountDownBg;
 import com.example.habitdeveloper.model.TipsModel;
-
+import com.example.habitdeveloper.habitdb.entity.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.habitdeveloper.habitdb.DBUtils.*;
 
 public class CountDownActivity extends AppCompatActivity {
 
@@ -52,6 +56,7 @@ public class CountDownActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name=intent.getStringExtra("name");
         String time=intent.getStringExtra("time");
+        addRecord(name,time);
         chronometer.setOnTimeCompleteListener(()->
             new AlertDialog.Builder(this)
                     .setTitle("在"+time+"中，你做了"+name+"呢!")
@@ -125,4 +130,18 @@ public class CountDownActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    private void addRecord(String name,String time){
+        Record record=new Record();
+        record.setDates(time);
+        record.setRecord(name);
+        MyDatabaseHelper instance = DBUtils.getInstance(this);
+        SQLiteDatabase database = instance.getReadableDatabase();
+        DBUtils db = new DBUtils(database);
+        if(db.findifRecordexist_byDate(time))
+            db.updateRecord(record);
+        else
+            db.AddRecord(record);
+    }
+
 }
