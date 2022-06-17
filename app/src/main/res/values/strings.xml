@@ -3,5 +3,6 @@
     <string name="calendar_default_text">"选择日期查看。"</string>
     <string name="isUp">hhhhh</string>
     <string name="offset">offset</string>
+    <string name="calendar_undo">没有活动哦，继续加油吧。</string>
 
 </resources>
