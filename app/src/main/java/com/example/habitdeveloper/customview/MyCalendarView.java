@@ -103,7 +103,7 @@ public class MyCalendarView extends MaterialCalendarView {
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setColor(Color.parseColor("#dcdcdc"));
                 paint.setStrokeWidth(10);
-                canvas.drawCircle((right-left)>>1, 40+((top-bottom)>>1), 40, paint);
+                canvas.drawCircle((right-left)>>1, 65+((top-bottom)>>1), 35, paint);
             });
         }
     }
