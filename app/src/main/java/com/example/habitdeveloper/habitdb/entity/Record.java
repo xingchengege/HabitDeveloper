@@ -8,6 +8,12 @@ public class Record {
 
     private String record;
 
+    public Record(){};
+    public Record(String date,String record){
+        this.record=record;
+        this.date=date;
+    }
+
     public String getDates() {
         return date;
     }

@@ -112,6 +112,39 @@ public class DBUtils {
     }
 
 
+    //获取所有record记录：已经通过测试！
+    public List<Record> getALLRecord(){
+        List<Record> records=new ArrayList<Record>();
+        String sql = "select count(*) from "+Record_tablename+" ";
+        Cursor cursor=db.rawQuery(sql,null);
+        cursor.moveToFirst();
+        int count=cursor.getInt(0);
+        if(count<1){
+            return null;
+        }
+        String sql2="select * from "+Record_tablename+" ";
+        Cursor c=db.rawQuery(sql2,null);
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            Record record=new Record(c.getString(0),c.getString(1));
+            records.add(record);
+            c.moveToNext();
+        }
+        return records;
+    }
+
+
+    //获取已打卡的天数：已经通过测试
+    public int getALLRecord_days(){
+        String sql = "select count(*) from "+Record_tablename+" ";
+        Cursor cursor=db.rawQuery(sql,null);
+        cursor.moveToFirst();
+        int count=cursor.getInt(0);
+        if(count<1){
+            return -1;
+        }
+        return count;
+    }
     //通过name查找action_times:已通过测试
     public List<Action> getAllAction() {
         List<Action> actions=new ArrayList<Action>();
