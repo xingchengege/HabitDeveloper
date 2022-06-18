@@ -14,10 +14,12 @@ import com.example.habitdeveloper.R;
 import com.example.habitdeveloper.customview.MyCalendarView;
 import com.example.habitdeveloper.habitdb.DBUtils;
 import com.example.habitdeveloper.habitdb.MyDatabaseHelper;
+import com.example.habitdeveloper.habitdb.entity.Record;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,12 +57,17 @@ public class calendar extends AppCompatActivity {
         //打卡日期画圈
         Date date=new Date();
         List<Date> dates = new ArrayList<>();
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        for(int i=0;i<10;i++){
-            calendar.add(calendar.DATE,-1); //把日期往后增加一天,整数  往后推,负数往前移动
-            dates.add(calendar.getTime()); //这个时间就是日期往后推一天的结果
+        List<Record> records = dbUtils.getALLRecord();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(int i=0;i<records.size(); i++){
+            try {
+                dates.add(simpleDateFormat.parse(records.get(i).getDates()));
+            }catch(Exception e){
+
+            }
+
         }
+
         calendarView.addCheckInDate(dates);
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener(){
