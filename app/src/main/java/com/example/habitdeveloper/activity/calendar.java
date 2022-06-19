@@ -58,12 +58,11 @@ public class calendar extends AppCompatActivity {
         Date date=new Date();
         List<Date> dates = new ArrayList<>();
         List<Record> records = dbUtils.getALLRecord();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for(int i=0;i<records.size(); i++){
             try {
                 dates.add(simpleDateFormat.parse(records.get(i).getDates()));
             }catch(Exception e){
-
             }
 
         }
