@@ -63,13 +63,15 @@ public class DBUtils {
         String sql1 = "insert into Actiontb values ('活动id1','眼保健操',1)";
         String sql2 = "insert into Actiontb values ('活动id2','阅览自习',2)";
         String sql3 = "insert into Actiontb values ('活动id3','健身锻炼',3)";
-        String sql5 = "insert into "+Record_tablename+" values ('2022-06-15','眼保健操')";
+        String sql5 = "insert into "+Record_tablename+" values ('2022-06-15','阅览自习')";
+        String sql6 = "insert into "+Record_tablename+" values ('2022-06-17','广播体操')";
 
 
         db.execSQL(sql1);
         db.execSQL(sql2);
         db.execSQL(sql3);
         db.execSQL(sql5);
+        db.execSQL(sql6);
 
     }
 
@@ -77,16 +79,17 @@ public class DBUtils {
 
 
 
-    //删除活动
+    //删除活动：已通过测试
     public boolean deleteAction(Action action) {
         //活动id不存在则删除失败
-        String sql1 = "select count(*) from action_tb where id = '" + action.getId() + "'";    //sql语句查询是否存在该名字
+        String sql1 = "select count(*) from "+Action_tablename+" where id = '" + action.getId() + "'";    //sql语句查询是否存在该名字
         Cursor cursor = db.rawQuery(sql1, null);
         cursor.moveToFirst();
         int count = cursor.getInt(0);
-        if (count <= 1)      //若不存在这个名字的习惯则直接返回false
+        System.out.println(count);
+        if (count < 1)      //若不存在这个名字的习惯则直接返回false
             return false;
-        String sql="delete from action_tb where id ='"+action.getId()+"'";
+        String sql="delete from "+Action_tablename+" where id ='"+action.getId()+"'";
         db.execSQL(sql);
         return true;
     }

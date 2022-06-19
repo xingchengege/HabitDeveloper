@@ -139,6 +139,7 @@ public class CountDownActivity extends AppCompatActivity {
         }
         else
             db.AddRecord(record);
+        database.close();
         finish();
     }
 

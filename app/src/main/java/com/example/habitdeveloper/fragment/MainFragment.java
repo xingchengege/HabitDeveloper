@@ -86,8 +86,9 @@ public class MainFragment extends Fragment {
         actions = dbUtils.getAllAction();
 
         if(actions != null) {
-            ActionAdapter actionAdapter = new ActionAdapter(getActivity(), actions);
+            ActionAdapter actionAdapter = new ActionAdapter(getActivity(), actions, this);
             recyclerView.setAdapter(actionAdapter);
         }
+        database.close();
     }
 }
