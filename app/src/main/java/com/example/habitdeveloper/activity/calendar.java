@@ -39,6 +39,7 @@ public class calendar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper = dbUtils.getInstance(this);
+
         db = helper.getWritableDatabase();//创建或打开数据库
         dbUtils=new DBUtils(db);
         dbUtils.createTable();
