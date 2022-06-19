@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HabitDeveloper"
         tools:targetApi="31">
         <activity
+            android:name=".activity.splash"
+            android:exported="false" />
+        <activity
             android:name=".activity.calendar"
             android:exported="true">
             <intent-filter>
