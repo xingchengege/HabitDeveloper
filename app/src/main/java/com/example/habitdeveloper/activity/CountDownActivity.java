@@ -86,6 +86,7 @@ public class CountDownActivity extends AppCompatActivity {
                 countDownBg.setModelList(mBallList,mTipsList);
             }
         });
+        mBtn.setVisibility(View.INVISIBLE);//隐藏这个目前没卵用的按钮
 
         countDownBg.isCollectTips(false);
         countDownBg.setOnBallItemListener(new CountDownBg.OnBallItemListener() {
