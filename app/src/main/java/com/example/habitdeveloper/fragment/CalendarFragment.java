@@ -33,6 +33,7 @@ public class CalendarFragment extends Fragment {
     private MyDatabaseHelper helper;
     private SQLiteDatabase db;
     private DBUtils dbUtils;
+    private MyCalendarView myCalendarView;
 
 
 
@@ -47,24 +48,36 @@ public class CalendarFragment extends Fragment {
         View view = View.inflate(getActivity(),R.layout.fragment_calendar,null);
 
         super.onCreate(savedInstanceState);
+
+        myCalendarView = view.findViewById(R.id.myCalendarView);
+        TextView textView = (TextView) view.findViewById(R.id.textView);
+        myCalendarView.setElevation(30);
+        textView.setElevation(30);
+
+        Date date = new Date();
+
+        updateCircles();
+
+        myCalendarView.setOnDateChangedListener(new OnDateSelectedListener(){
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                String dateString =date.getYear()+"-"+String.format("%02d", date.getMonth())+"-"+String.format("%02d", date.getDay());
+                String text=dbUtils.findRecord_byDate(dateString);
+                if(!text.equals("null")){
+                    textView.setText(text);
+                }else{
+                    textView.setText(dateString+getString(R.string.calendar_undo));
+                }
+            }
+        });
+
+
+        return view;
+    }
+
+    public void updateCircles(){
         helper = dbUtils.getInstance(getActivity());
         db = helper.getWritableDatabase();//创建或打开数据库
         dbUtils=new DBUtils(db);
-        dbUtils.createTable();
-
-
-        MyCalendarView calendarView = (MyCalendarView) view.findViewById(R.id.myCalendarView);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        calendarView.setElevation(30);
-        textView.setElevation(30);
-
-
-        CalendarDay calendarDay=CalendarDay.today();
-        calendarView.setDateSelected(calendarDay,true);
-
-
-        //打卡日期画圈
-        Date date=new Date();
         List<Date> dates = new ArrayList<>();
         List<Record> records = dbUtils.getALLRecord();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -75,22 +88,11 @@ public class CalendarFragment extends Fragment {
             }
 
         }
+        myCalendarView.addCheckInDate(dates);
 
-        calendarView.addCheckInDate(dates);
-
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener(){
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                String dateString =date.getYear()+"-"+date.getMonth()+"-"+date.getDay();
-                String text=dbUtils.findRecord_byDate(dateString);
-                if(text!= "null"){
-                    textView.setText(text);
-                }else{
-                    textView.setText(dateString+getString(R.string.calendar_undo));
-                }
-            }
-        });
-
-
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        CalendarDay calendarDay=CalendarDay.today();
+        myCalendarView.setDateSelected(calendarDay,false);
+        myCalendarView.setDateSelected(calendarDay,true);
     }
+
 }

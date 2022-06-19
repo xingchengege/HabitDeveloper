@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.akshay.library.CurveBottomBar;
 import com.example.habitdeveloper.R;
+import com.example.habitdeveloper.fragment.AboutFragment;
 import com.example.habitdeveloper.fragment.CalendarFragment;
 import com.example.habitdeveloper.fragment.MainFragment;
 import com.example.habitdeveloper.fragment.TempFragment;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private CalendarFragment calendarFragment;
     private MainFragment mainFragment;
+    private AboutFragment aboutFragment;
     private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton=findViewById(R.id.fab);
         mainFragment=new MainFragment();
         calendarFragment=new CalendarFragment();
+        aboutFragment = new AboutFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.container_view, mainFragment)
                 .add(R.id.container_view, calendarFragment)
+                .add(R.id.container_view, aboutFragment)
                 .hide(calendarFragment)
+                .hide(aboutFragment)
                 .commitAllowingStateLoss();
         curveBottomBar.getMenu().setGroupCheckable(0,false,true);
         floatingActionButton.setImageResource(R.drawable.tab_main_selected);
@@ -59,16 +64,20 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_calendar:
                     getSupportFragmentManager().beginTransaction()
                             .hide(mainFragment)
+                            .hide(aboutFragment)
                             .show(calendarFragment)
                             .commitAllowingStateLoss();
                     textView.setText("我  的  足  迹");
+                    calendarFragment.updateCircles();
                     return true;
                 case R.id.menu_routine:
                     getSupportFragmentManager().beginTransaction()
                             .hide(mainFragment)
                             .hide(calendarFragment)
+                            .show(aboutFragment)
                             .commitAllowingStateLoss();
                     textView.setText("心  路  历  程");
+                    aboutFragment.nextWord();
                     return true;
             }
             return false;
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .hide(calendarFragment)
+                    .hide(aboutFragment)
                     .show(mainFragment)
                     .commitAllowingStateLoss();
 

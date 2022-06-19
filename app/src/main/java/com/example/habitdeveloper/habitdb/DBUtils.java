@@ -60,16 +60,16 @@ public class DBUtils {
     }
     //插入测试例
     public void insertTestRecord() {
-        String sql1 = "insert into Actiontb values ('活动id1','活动name1',1)";
-        String sql2 = "insert into Actiontb values ('活动id2','活动name2',2)";
-        String sql5 = "insert into "+Record_tablename+" values ('2022-6-15','活动1 10')";
+        String sql1 = "insert into Actiontb values ('活动id1','眼保健操',1)";
+        String sql2 = "insert into Actiontb values ('活动id2','阅览自习',2)";
+        String sql3 = "insert into Actiontb values ('活动id3','健身锻炼',3)";
+        String sql5 = "insert into "+Record_tablename+" values ('2022-06-15','眼保健操')";
 
 
         db.execSQL(sql1);
         db.execSQL(sql2);
+        db.execSQL(sql3);
         db.execSQL(sql5);
-
-
 
     }
 

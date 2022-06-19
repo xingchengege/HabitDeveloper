@@ -78,10 +78,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolde
         public void setData(Action action){
             textView.setText(action.getName());
             textClock.setText(String.format("%d min", action.getTimes()));
-            bindClickListener(action);
-        }
-
-        public void bindClickListener(Action action){
             cardView.setOnClickListener(e -> {
                 Intent intent = new Intent(context, CountDownActivity.class);
                 intent.putExtra("name", action.getName());

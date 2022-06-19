@@ -24,7 +24,10 @@ import com.example.habitdeveloper.model.*;
 import com.example.habitdeveloper.model.CountDownBg;
 import com.example.habitdeveloper.model.TipsModel;
 import com.example.habitdeveloper.habitdb.entity.*;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.example.habitdeveloper.habitdb.DBUtils.*;
 
@@ -52,37 +55,23 @@ public class CountDownActivity extends AppCompatActivity {
         videoView.setVideoURI(Uri.parse(url));
         videoView.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
         videoView.start();
+
         chronometer = findViewById(R.id.textClock);
         Intent intent = getIntent();
         String name=intent.getStringExtra("name");
-        String time=intent.getStringExtra("time");
-        addRecord(name,time);
-        chronometer.setOnTimeCompleteListener(()->
-            new AlertDialog.Builder(this)
-                    .setTitle("在"+time+"中，你做了"+name+"呢!")
-                    .show());
-        chronometer.setOnTimeCompleteListener(()-> new AlertDialog.Builder(this)
-                .setTitle("HelloWorld")
-                .show()
-        );
-        chronometer.start(50);
+        long tm=intent.getIntExtra("time", 999);
 
+        chronometer.setOnTimeCompleteListener(()-> {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+            Toast.makeText(CountDownActivity.this, "在"+tm+" min中，你做了"+name+"呢~", Toast.LENGTH_LONG).show();
+
+            addRecord(name, new Date());
+        });
+        chronometer.start(tm*60);
+//        chronometer.start(5);
 
         init();
         countDownBg = findViewById(R.id.countDownBg);
-        Button mBtn = findViewById(R.id.button);
-        mBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                countDownBg.setModelList(mBallList,mTipsList);
-            }
-        });
-        mBtn.post(new Runnable() {
-            @Override
-            public void run() {
-                countDownBg.setModelList(mBallList,mTipsList);
-            }
-        });
 
         countDownBg.isCollectTips(false);
         countDownBg.setOnBallItemListener(new CountDownBg.OnBallItemListener() {
@@ -131,17 +120,25 @@ public class CountDownActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void addRecord(String name,String time){
+    private void addRecord(String name, Date day){
         Record record=new Record();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String time = simpleDateFormat.format(day);
+
         record.setDates(time);
         record.setRecord(name);
         MyDatabaseHelper instance = DBUtils.getInstance(this);
         SQLiteDatabase database = instance.getReadableDatabase();
         DBUtils db = new DBUtils(database);
-        if(db.findifRecordexist_byDate(time))
+        if(db.findifRecordexist_byDate(time)) {
+            String origin = db.findRecord_byDate(time);
+            record.setRecord(origin+", "+name);
             db.updateRecord(record);
+        }
         else
             db.AddRecord(record);
+        finish();
     }
 
 }
