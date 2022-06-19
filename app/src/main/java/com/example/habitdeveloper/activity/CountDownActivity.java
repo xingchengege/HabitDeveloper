@@ -27,6 +27,7 @@ import com.example.habitdeveloper.habitdb.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.habitdeveloper.habitdb.DBUtils.*;
+import java.util.Calendar;
 
 public class CountDownActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class CountDownActivity extends AppCompatActivity {
     private CountDownBg countDownBg;
     private List<BallModel> mBallList;
     private List<TipsModel> mTipsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +56,19 @@ public class CountDownActivity extends AppCompatActivity {
         videoView.start();
         chronometer = findViewById(R.id.textClock);
         Intent intent = getIntent();
-        String name=intent.getStringExtra("name");
-        String time=intent.getStringExtra("time");
+        String name=intent.getStringExtra("name");  //活动名称
+        String time=intent.getStringExtra("time");  //活动时间
         addRecord(name,time);
         chronometer.setOnTimeCompleteListener(()->
             new AlertDialog.Builder(this)
-                    .setTitle("在"+time+"中，你做了"+name+"呢!")
+                    .setTitle("你做了"+time+"分钟的"+name+"运动呢!")
                     .show());
         chronometer.setOnTimeCompleteListener(()-> new AlertDialog.Builder(this)
-                .setTitle("HelloWorld")
+                .setTitle("运动结束,你真棒!")
                 .show()
         );
-        chronometer.start(50);
+        int timeInt = Integer.valueOf(time).intValue(); //String转Int
+        chronometer.start(timeInt);
 
 
         init();
@@ -103,6 +106,9 @@ public class CountDownActivity extends AppCompatActivity {
 
 
     private void init(){
+        MyDatabaseHelper instance = DBUtils.getInstance(this);
+        SQLiteDatabase database = instance.getReadableDatabase();
+        DBUtils db = new DBUtils(database);
         if(getRequestedOrientation()!=ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
@@ -124,6 +130,8 @@ public class CountDownActivity extends AppCompatActivity {
         mTipsList.add(new TipsModel("我一直以为人无完人，直到我遇见了坚持的你"));
         mTipsList.add(new TipsModel("我只看到了4个字:仙女下凡"));
         mTipsList.add(new TipsModel("月色和雪色之间，你是第三种绝色"));
+        int totalDays=db.getALLRecord_days();
+        mTipsList.add(new TipsModel("今天是你坚持的"+totalDays+"天呢!"));
     }
     //开发用按钮，到时候删除，切换页面的方法
     public void nextView(View view){
@@ -132,8 +140,10 @@ public class CountDownActivity extends AppCompatActivity {
     }
 
     private void addRecord(String name,String time){
+        Calendar now = Calendar.getInstance();
+        String stime=now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH);
         Record record=new Record();
-        record.setDates(time);
+        record.setDates(stime);
         record.setRecord(name);
         MyDatabaseHelper instance = DBUtils.getInstance(this);
         SQLiteDatabase database = instance.getReadableDatabase();
