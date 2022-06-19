@@ -10,5 +10,7 @@
     <string name="action_time_hint">请输入定时时间（单位：分钟）</string>
     <string name="sure">确定</string>
     <string name="cancel">取消</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
