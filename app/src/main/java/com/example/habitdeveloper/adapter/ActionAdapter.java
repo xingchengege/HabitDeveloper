@@ -29,7 +29,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolde
     private static final List<Integer> colorResList = new ArrayList<>();
     static {
         colorResList.add(R.color.blue);
-        colorResList.add(R.color.orange);
         colorResList.add(R.color.brown);
         colorResList.add(R.color.yellow);
         colorResList.add(R.color.pink);
@@ -48,7 +47,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.InnerHolde
         View view = View.inflate(context, R.layout.item_action_view, null);
         return new InnerHolder(view);
     }
-
+    
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
         holder.setData(actions.get(position));
