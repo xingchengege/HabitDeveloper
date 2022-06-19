@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/bar_calendar"
+        android:title=""
+         />
+<!--        android:icon="@drawable/bar_my"-->
+    <!--因为需要覆盖view 此处省略android:icon-->
+    <item
+        android:id="@+id/menu_empty"
+        android:title=""
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/menu_routine"
+        android:icon="@drawable/bar_histogram"
+        android:title=""
+        />
+<!--android:icon="@drawable/bar_news"-->
+</menu>
