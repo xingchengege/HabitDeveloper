@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/activity_calendar.xml" value="0.14635416666666667" />
         <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/activity_countdown.xml" value="0.14635416666666667" />
         <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/activity_main.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/activity_splash.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/dialog_input.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/fragment_about.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/fragment_calendar.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/fragment_main.xml" value="0.14635416666666667" />
+        <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/item_action_view.xml" value="0.14635416666666667" />
         <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/item_ball.xml" value="0.14635416666666667" />
         <entry key="..\:/CLT/HabitDeveloper/app/src/main/res/layout/item_tips.xml" value="0.4466666666666667" />
         <entry key="..\:/Files/Programme/Andriod/Design/HabitDeveloper/app/src/main/res/drawable/bg_countdown_clock.xml" value="0.1" />

@@ -73,13 +73,17 @@ public class CountDownActivity extends AppCompatActivity {
 
         init();
         countDownBg = findViewById(R.id.countDownBg);
-
+        countDownBg.setModelList(mBallList,mTipsList);  //这是初始化设置的
         countDownBg.isCollectTips(false);
         countDownBg.setOnBallItemListener(new CountDownBg.OnBallItemListener() {
             @Override
             //在这里也可以加个统计时间的量放到自己串里面
             public void onItemClick(BallModel ballModel) {
                 Toast.makeText(CountDownActivity.this,"燃烧了"+ballModel.getValue()+"的热量呢~",Toast.LENGTH_SHORT).show();
+                if(mBallList.size()<2) {
+                    init();
+                    countDownBg.setModelList(mBallList, mTipsList);
+                }
             }
         });
 
